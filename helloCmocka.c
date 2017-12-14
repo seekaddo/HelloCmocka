@@ -24,7 +24,6 @@ static int teardown(void **state) {
         return 0;
 }
 
-/* A test case that does nothing and succeeds. */
 static void null_test_success(void **state) {
         (void) state;
 }
