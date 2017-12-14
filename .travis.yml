@@ -23,7 +23,7 @@ addons:
 before_install:
       - echo uname -a
       - echo gcc -v
-      - make install
+      - make cmock-install
 
 
 
