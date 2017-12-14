@@ -54,6 +54,17 @@ helloCmocka: $(OBJECTS1)
 .PHONY: clean freeshm testall
 
 ##test all with force
+
+cmock-install:
+	xz cmocka-1.1.0.tar
+    tar vxf cmocka-1.1.0.tar
+    cd cmocka-1.1.0
+    mkdir build
+    cd build
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+    make
+    sudo make install
+
 testall:
 	./helloCmocka
 
