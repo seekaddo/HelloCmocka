@@ -56,7 +56,7 @@ helloCmocka: $(OBJECTS1)
 ##test all with force
 
 cmock-install:
-	xz cmocka-1.1.0.tar.xz
+	xz -v -d cmocka-1.1.0.tar.xz
 	tar vxf cmocka-1.1.0.tar
 	cd cmocka-1.1.0
 	mkdir build
