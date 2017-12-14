@@ -19,7 +19,6 @@ addons:
             - cmake
             - cmake-data
 
-
 before_install:
       - uname -a
       - gcc -v
@@ -31,8 +30,6 @@ before_install:
       -	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
       -	make
       -	sudo make install
-
-
 
 script:
   - make all
