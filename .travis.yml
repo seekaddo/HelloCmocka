@@ -1,4 +1,3 @@
-
 language: c
 sudo: required
 
@@ -7,8 +6,9 @@ os:
 
 
 compiler:
-  - gcc
+  #- gcc
   - gcc-7
+  #- clang
 addons:
     apt:
         sources:
@@ -19,20 +19,23 @@ addons:
             - cmake
             - cmake-data
 
+
 before_install:
-      - uname -a
-      - gcc -v
+      - echo uname -a
+      - echo gcc -v
       - xz cmocka-1.1.0.tar
-      -	tar vxf cmocka-1.1.0.tar
-      -	cd cmocka-1.1.0.
-      -	mkdir build
-      -	cd build
-      -	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
-      -	make
-      -	sudo make install
+      - tar vxf cmocka-1.1.0.tar
+      - cd cmocka-1.1.0
+      - mkdir build
+      - cd build
+      - cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+      - make
+      - sudo make install
+
+
 
 script:
-  - make all
+  - make
   # tests
   - make testall
   - make clean
