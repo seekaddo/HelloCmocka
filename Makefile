@@ -61,6 +61,7 @@ cmock-install:
 	cd cmocka-1.1.0
 	mkdir build
 	cd build
+	pwd
 	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
 	make
 	sudo make install

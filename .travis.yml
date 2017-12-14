@@ -23,11 +23,12 @@ addons:
 before_install:
       - echo uname -a
       - echo gcc -v
-      - make cmock-install
 
 
 
 script:
+  - make cmock-install
+  - cd ..
   - make
   # tests
   - make testall
