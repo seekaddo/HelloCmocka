@@ -57,13 +57,13 @@ helloCmocka: $(OBJECTS1)
 
 cmock-install:
 	xz -vv cmocka-1.1.0.tar.xz
-    tar vxf cmocka-1.1.0.tar
-    cd cmocka-1.1.0
-    mkdir build
-    cd build
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
-    make
-    sudo make install
+	tar vxf cmocka-1.1.0.tar
+	cd cmocka-1.1.0
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+	make
+	sudo make install
 
 testall:
 	./helloCmocka
