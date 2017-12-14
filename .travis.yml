@@ -1,0 +1,42 @@
+
+language: c
+sudo: required
+
+os:
+    - linux
+
+
+compiler:
+  - gcc
+  - gcc-7
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test # gcc
+        packages:
+            - gcc-7
+            - make
+            - cmake
+            - cmake-data
+
+
+before_install:
+      - uname -a
+      - gcc -v
+      - xz cmocka-1.1.0.tar
+      -	tarvxf cmocka-1.1.0.tar
+      -	cd cmocka-1.1.0.
+      -	mkdir build
+      -	cd build
+      -	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+      -	make
+      -	sudo make install
+
+
+
+script:
+  - make all
+  # tests
+  - make testall
+  - make clean
+  - make distclean
