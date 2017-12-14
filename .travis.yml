@@ -34,7 +34,7 @@ script:
   - make && sudo make install
   - ls -l
   - pwd
-  - cd ..
+  - cd ../..
   - make
   # tests
   - make testall
