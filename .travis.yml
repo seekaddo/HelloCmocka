@@ -1,50 +1,19 @@
 language: c
-sudo: required
-
-os:
-    - linux
-    - osx
-
-
-compiler:
-  #- gcc
-  - gcc-7
-  #- clang
-addons:
-    apt:
-        sources:
-            - ubuntu-toolchain-r-test # gcc
-        packages:
-            - gcc-7
-            - make
-            - cmake
-            - cmake-data
-
+sudo: false # only for faster builds
 
 before_install:
       - echo uname -a
       - echo gcc -v
       - if [[ "$TRAVIS_OS_NAME" == "osx" ]];
-        then brew upgrade ; brew install cmocka gcovr ;
+        then brew upgrade ; brew install cmocka ;
         fi
 
 
-
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]];then
-       sudo apt-get install gcovr
-       make cmock-install; cd cmocka-1.1.0; mkdir -p build;
-       cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release .. ;
-       make && sudo make install; cd ../.. ;
-    fi
-  - ls -l
-  - pwd
-  - make
-  # tests
-  - make testall
-  - make clean
-  - make distclean
-  - gcov-5 -n -o . helloCmocka.c
+  - clang -coverage -O0 -lcmocka  helloCmocka.c -o hello
+  - ./hello
+  - gcov helloCmocka.c
+
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
