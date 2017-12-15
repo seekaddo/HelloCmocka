@@ -2,7 +2,9 @@
 // Created by Addo Dennis on 12/14/17.
 //
 
-#include <stdio.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
 #include <cmocka.h>
 #include <stdlib.h>
 
@@ -34,10 +36,14 @@ static void int_test_success(void **state) {
 
         assert_int_equal(*answer, 42);
 }
-
+static void failing_test(void **c) {
+        (void)*c;
+        assert_false(1 == 0);
+}
 
 int main(void) {
         const struct CMUnitTest tests[] = {
+                cmocka_unit_test(failing_test),
                 cmocka_unit_test(null_test_success),
                 cmocka_unit_test_setup_teardown(int_test_success, setup, teardown),
         };
