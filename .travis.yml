@@ -20,6 +20,9 @@ addons:
             - cmake
             - cmake-data
 
+env:
+  global:
+    - CODECOV_TOKEN=:2e3eee3d-9777-48c7-8795-99c2151eb624
 
 before_install:
       - echo uname -a
@@ -43,3 +46,7 @@ script:
   - make testall
   - make clean
   - make distclean
+  - gcov helloCmocka.c
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

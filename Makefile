@@ -17,7 +17,7 @@
 
 
 CC=gcc
-CFLAGS=-DDEBUG -Wall -pedantic -Werror -Wextra -Wstrict-prototypes \
+CFLAGS=-DDEBUG -coverage -Wall -pedantic -Werror -Wextra -Wstrict-prototypes \
 		-Wwrite-strings -fno-common -g -O3 -std=gnu11
 CP=cp
 CD=cd
