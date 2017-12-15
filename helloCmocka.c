@@ -7,6 +7,7 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 
 static int setup(void **state) {
@@ -16,6 +17,8 @@ static int setup(void **state) {
         *answer = 42;
 
         *state = answer;
+        //fprintf(stdout,"setup cpmpleted!!\n");
+        //fprintf(stdout,"setup completion message %d!!\n",*((int*)(*state)));
 
         return 0;
 }
@@ -44,9 +47,13 @@ static void failing_test(void **c) {
 int main(void) {
         const struct CMUnitTest tests[] = {
                 cmocka_unit_test(failing_test),
+        };
+
+        const struct CMUnitTest tests1[] = {
                 cmocka_unit_test(null_test_success),
                 cmocka_unit_test_setup_teardown(int_test_success, setup, teardown),
         };
 
-        return cmocka_run_group_tests(tests, NULL, NULL);
+        return cmocka_run_group_tests_name("failing_test", tests, NULL, NULL)
+                || cmocka_run_group_tests_name("success_test", tests1, NULL, NULL);
 }
