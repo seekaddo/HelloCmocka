@@ -17,8 +17,8 @@
 
 
 CC=gcc
-CFLAGS=-DDEBUG -coverage -O0 -Wall -pedantic -Werror -Wextra -Wstrict-prototypes \
-		-Wwrite-strings -fno-common  -std=gnu11
+CFLAGS=-DDEBUG -Wall -pedantic -Werror -Wextra -Wstrict-prototypes \
+		-Wwrite-strings -fno-common -O3 -std=gnu11
 CP=cp
 CD=cd
 MV=mv
@@ -47,7 +47,7 @@ EXCLUDE_PATTERN=footrulewidth
 all: helloCmocka
 
 helloCmocka: $(OBJECTS1)
-	$(CC) $^ -o $@ -lcmocka
+	$(CC) -coverage $^ -o $@ -lcmocka
 
 
 .SILENT: clean freeshm
