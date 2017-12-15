@@ -25,13 +25,14 @@ before_install:
       - echo uname -a
       - echo gcc -v
       - if [[ "$TRAVIS_OS_NAME" == "osx" ]];
-        then brew upgrade ; brew install cmocka ;
+        then brew upgrade ; brew install cmocka gcovr ;
         fi
 
 
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]];then
+       sudo apt-get install gcovr
        make cmock-install; cd cmocka-1.1.0; mkdir -p build;
        cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release .. ;
        make && sudo make install; cd ../.. ;
@@ -43,7 +44,7 @@ script:
   - make testall
   - make clean
   - make distclean
-  - gcov helloCmocka.c
+  - gcovr helloCmocka.c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
