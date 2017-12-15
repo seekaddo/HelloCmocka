@@ -1,5 +1,25 @@
 language: c
-sudo: false # only for faster builds
+sudo: required
+
+os:
+    - linux
+    - osx
+
+
+compiler:
+  #- gcc
+  - gcc-7
+  #- clang
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test # gcc
+        packages:
+            - gcc-7
+            - make
+            - cmake
+            - cmake-data
+
 
 before_install:
       - echo uname -a
@@ -9,11 +29,17 @@ before_install:
         fi
 
 
+
 script:
-  - clang -coverage -O0 -lcmocka  helloCmocka.c -o hello
-  - ./hello
-  - gcov helloCmocka.c
-
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]];then
+       make cmock-install; cd cmocka-1.1.0; mkdir -p build;
+       cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release .. ;
+       make && sudo make install; cd ../.. ;
+    fi
+  - ls -l
+  - pwd
+  - make
+  # tests
+  - make testall
+  - make clean
+  - make distclean
