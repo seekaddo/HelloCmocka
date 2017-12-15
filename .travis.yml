@@ -44,7 +44,7 @@ script:
   - make testall
   - make clean
   - make distclean
-  - gcovr helloCmocka.c
+  - gcov-5 -n -o . helloCmocka.c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
