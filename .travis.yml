@@ -29,14 +29,10 @@ before_install:
 
 
 script:
-  - make cmock-install
-  - cd cmocka-1.1.0
-  - mkdir -p build
-  - cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
-  - make && sudo make install
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; make cmock-install; cd cmocka-1.1.0; mkdir -p build ;fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release .. ; make && sudo make install; cd ../.. ;fi
   - ls -l
   - pwd
-  - cd ../..
   - make
   # tests
   - make testall
